@@ -22,7 +22,7 @@ module.exports = {
   loading: { color: '#3B8070' },
   plugins: [
     // ssr: false to only include it on client-side
-    {src: '~/plugins/vuikit.js', ssr: false}
+    {src: '~/plugins/vuikit.js', ssr: false},
   ],
   /*
   ** Build configuration
@@ -41,5 +41,5 @@ module.exports = {
         })
       }
     }
-  }
+  },
 }

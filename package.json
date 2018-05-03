@@ -19,6 +19,7 @@
   "devDependencies": {
     "@vuikit/icons": "^0.8.1",
     "@vuikit/theme": "^0.8.0",
+    "axios": "^0.18.0",
     "babel-eslint": "^8.2.1",
     "eslint": "^4.15.0",
     "eslint-friendly-formatter": "^3.0.0",

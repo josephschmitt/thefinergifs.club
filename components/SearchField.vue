@@ -1,17 +1,19 @@
 <template>
   <div class="uk-flex uk-flex-stretch uk-flex-column">
     <form class="uk-search uk-search-large uk-search-default"
-        v-bind:class="{'is-focused': !!query}">
+        v-bind:class="{'is-focused': !!query}"
+        v-on:submit.prevent="onSubmit">
       <span uk-search-icon="" class="uk-search-icon uk-icon">
         <vk-icon icon="search" ratio="2"></vk-icon>
       </span>
-      <input class="uk-search-input" type="search" placeholder="Search..."
-          autofocus v-model="query">
+      <input class="uk-search-input" type="search" placeholder="Search for your favorite line..."
+          autofocus v-model="query" v-on:input="search(query)">
     </form>
   </div>
 </template>
 
 <script>
+  import {mapActions} from 'vuex'
   import {IconSearch} from '@vuikit/icons';
 
   export default {
@@ -22,6 +24,9 @@
       return {
         query: '',
       };
+    },
+    methods: {
+      ...mapActions(['search']),
     },
     mounted() {
       this.$el.querySelector('input[type="search"]').focus();
@@ -35,6 +40,8 @@
   }
 
   .uk-search-large {
+    position: sticky;
+    top: 0;
     width: auto;
   }
 

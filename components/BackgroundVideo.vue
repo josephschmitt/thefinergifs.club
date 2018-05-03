@@ -26,11 +26,11 @@
 
   .background-video:after {
     content: '';
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    position: absolute;
+    top: -100%;
+    right: -100%;
+    bottom: -100%;
+    left: -100%;
     z-index: 0;
     background: rgba(0, 0, 0, 0.5);
   }
