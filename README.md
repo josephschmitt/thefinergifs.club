@@ -1,6 +1,6 @@
 # thefinerthings.club
 
-> Nuxt.js project containing the source that builds [thefinerthings.club](https://thefinerthings.club) website.
+> Nuxt.js project containing the source that builds [thefinerthings.club](http://thefinerthings.club) website.
 
 ## Build Setup
 
