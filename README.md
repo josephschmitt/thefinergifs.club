@@ -1,6 +1,6 @@
-# @joe-cli/finer-things-club
+# thefinerthings.club
 
-> Nuxt.js project
+> Nuxt.js project containing the source that builds [thefinerthings.club](https://thefinerthings.club) website.
 
 ## Build Setup
 
