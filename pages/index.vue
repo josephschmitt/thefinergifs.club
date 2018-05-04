@@ -35,8 +35,4 @@
     position: relative;
     z-index: 1;
   }
-
-  .search-field {
-    margin-top: 15%;
-  }
 </style>

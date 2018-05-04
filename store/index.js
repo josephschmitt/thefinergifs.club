@@ -7,6 +7,7 @@ const WAIT = 250;
 export const state = () => ({
   page: 'index',
   isSearching: false,
+  isMobile: false,
   results: [],
 });
 
@@ -16,6 +17,9 @@ export const mutations = {
   },
   updateSearchState(state, isSearching) {
     state.isSearching = isSearching;
+  },
+  updateMobileState(state, isMobile) {
+    state.isMobile = isMobile;
   },
   refreshResults(state, results) {
     state.results = results.map(({fields}) => fields);

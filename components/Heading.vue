@@ -1,10 +1,11 @@
 <template>
   <div>
-    <div class="uk-flex uk-flex-left uk-flex-nowrap">
-      <h2>The Finer Gifs Club</h2>
-      <vk-tabs class="tabs" align="right">
+    <div class="uk-flex uk-flex-left uk-flex-nowrap uk-margin-top">
+      <h2>The Finer Gifs Club <span class="uk-label">Beta</span></h2>
+      <vk-tabs class="uk-hidden uk-visible@m tabs" align="right">
         <vk-tabs-item title="Home"></vk-tabs-item>
-        <vk-tabs-item title="About"></vk-tabs-item>
+        <vk-tabs-item title="About" href="http://www.calvin.edu/~cjn8/dunder_mifflin/">
+        </vk-tabs-item>
       </vk-tabs>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="uk-container uk-container-large">
-    <vk-grid class="uk-flex uk-flex-wrap uk-flex-left">
+    <vk-grid class="uk-flex uk-flex-wrap uk-flex-center">
       <result v-if="results" v-for="result in results" :key="result.id"
           :result="result"></result>
     </vk-grid>
