@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <nuxt/>
+    <nuxt class="uk-light uk-background-secondary" />
   </div>
 </template>
 

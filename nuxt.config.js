@@ -20,6 +20,9 @@ module.exports = {
   ** Customize the progress bar color
   */
   loading: { color: '#3B8070' },
+  router: {
+    middleware: 'searchQuery',
+  },
   plugins: [
     // ssr: false to only include it on client-side
     {src: '~/plugins/vuikit.js', ssr: false},

@@ -1,5 +1,5 @@
 <template>
-  <div class="uk-light uk-background-secondary">
+  <div :class="{'is-searching': isSearching}">
     <background-video></background-video>
     <div class="uk-container uk-container-small uk-flex uk-flex-column uk-flex-stretch">
       <heading></heading>
@@ -10,6 +10,8 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex'
+
   import BackgroundVideo from '~/components/BackgroundVideo.vue';
   import Heading from '~/components/Heading.vue';
   import SearchField from '~/components/SearchField.vue';
@@ -22,6 +24,9 @@
       SearchField,
       SearchResults,
     },
+    computed: {
+      ...mapState(['isSearching']),
+    }
   };
 </script>
 
