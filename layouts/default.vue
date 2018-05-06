@@ -1,13 +1,19 @@
 <template>
-  <div class="app-container" :class="{'is-searching': isSearching}">
+  <div class="uk-light uk-background-secondary uk-container app-container"
+      :class="{
+        'is-searching': isSearching,
+        'uk-container-expand': isSearching,
+        'uk-container-small': !isSearching,
+      }">
     <background></background>
-    <search-field class="search-field"></search-field>
-    <nuxt class="uk-light uk-background-secondary page-container" />
+    <search-field class="uk-margin-top search-field"></search-field>
+    <nuxt class="uk-margin-top page-container" />
   </div>
 </template>
 
 <script>
-  import {mapState} from 'vuex'
+  import {ResizeSensor} from 'css-element-queries';
+  import {mapMutations, mapState} from 'vuex'
 
   import Background from '~/components/Background.vue';
   import SearchField from '~/components/SearchField.vue';
@@ -19,6 +25,16 @@
     },
     computed: {
       ...mapState(['isSearching']),
+    },
+    methods: {
+      onResizeSensor() {
+        this.updateMobileState(this.$el.clientWidth < 650);
+      },
+      ...mapMutations(['updateMobileState']),
+    },
+    mounted() {
+      this.rs = new ResizeSensor(this.$el, this.onResizeSensor);
+      this.onResizeSensor();
     },
   };
 </script>

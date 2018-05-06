@@ -1,5 +1,5 @@
 <template>
-  <div class="uk-container uk-container-large uk-margin-large-top">
+  <div class="uk-container uk-container-large">
     <div class="results">
       <result v-if="results" v-for="result in results" :key="result.id"
           :result="result"></result>

@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <div class="uk-flex uk-flex-left uk-flex-nowrap uk-margin-top">
-      <h2>The Finer Gifs Club <span class="uk-label">Beta</span></h2>
+  <div :class="{'uk-margin-large-bottom': !isMobile}">
+    <div class="uk-flex uk-flex-left uk-flex-nowrap">
+      <h2 :class="{'uk-text-large': isMobile}">
+        The Finer Gifs Club <span class="uk-label">Beta</span>
+      </h2>
       <vk-tabs class="uk-hidden uk-visible@m tabs" align="right">
         <vk-tabs-item title="Home"></vk-tabs-item>
         <vk-tabs-item title="About" href="http://www.calvin.edu/~cjn8/dunder_mifflin/">
@@ -12,7 +14,12 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex';
+
   export default {
+    computed: {
+      ...mapState(['isMobile']),
+    }
   };
 </script>
 

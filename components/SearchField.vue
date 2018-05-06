@@ -1,22 +1,18 @@
 <template>
   <div>
-    <div class="uk-flex uk-flex-stretch uk-flex-column"
-        :class="{'uk-container uk-container-small': !isSearching}">
-      <form class="uk-search"
-          v-bind:class="searchFieldClass"
-          v-on:submit.prevent="onSubmit">
-        <span class="uk-search-icon uk-icon" :class="{'is-mobile': isMobile}">
-          <vk-icon icon="search" :ratio="isMobile ? 1 : 2"></vk-icon>
-        </span>
-        <input class="uk-search-input" type="search" placeholder="Search for a quote from The Office..."
-            autofocus v-model="query" v-on:input="onQueryChange()">
-      </form>
-    </div>
+    <form class="uk-search uk-search-navbar"
+        :class="searchFieldClass"
+        @submit.prevent="onSubmit">
+      <vk-icon class="uk-search-icon" icon="search" :ratio="isMobile ? 1 : 2"></vk-icon>
+      <input class="uk-search-input" type="search"
+          :placeholder="placeholder" autofocus
+          v-model="query" v-on:input="onQueryChange()">
+    </form>
+    <hr class="uk-divider-icon" v-if="isSearching">
   </div>
 </template>
 
 <script>
-  import {ResizeSensor} from 'css-element-queries';
   import {mapMutations, mapState} from 'vuex';
   import {IconSearch} from '@vuikit/icons';
 
@@ -38,18 +34,15 @@
           this.$router.push({name: 'index'});
         }
       },
-      onResizeSensor() {
-        // this.isMobile = this.$el.clientWidth < 650;
-        this.updateMobileState(this.$el.clientWidth < 650);
-      },
-      ...mapMutations(['updateMobileState']),
     },
     computed: {
+      placeholder() {
+        return this.isMobile ? 'Search quote...' : 'Search for a quote from The Office...';
+      },
       searchFieldClass() {
         return {
           'is-focused': !!this.query,
-          'uk-search-large uk-search-default': !this.isMobile,
-          'uk-search uk-search-navbar': this.isMobile,
+          'uk-search-large': !this.isMobile,
         };
       },
       ...mapState(['isMobile', 'isSearching']),
@@ -59,8 +52,6 @@
     },
     mounted() {
       this.$el.querySelector('input[type="search"]').focus();
-      this.rs = new ResizeSensor(this.$el, this.onResizeSensor);
-      this.onResizeSensor();
     }
   }
 </script>
@@ -70,34 +61,21 @@
     display: inline-block;
   }
 
-  .uk-search {
+  .uk-search,
+  .uk-search-input {
     width: 100%;
   }
 
-  .uk-search-large, .uk-search-input {
-    transition: all 250ms ease;
+  .uk-container-small .uk-search {
+    margin-left: -20px;
+  }
+
+  .uk-container-small .uk-search-large {
+    margin-left: -40px;
   }
 
   .uk-search-large .uk-search-input {
     font-size: 34px;
-  }
-
-  .uk-search-icon.is-mobile {
-    width: auto;
-  }
-
-  .uk-search-icon.is-mobile + .uk-search-input {
-    padding-left: 30px;
-    font-size: 18px;
-  }
-
-  .uk-search-large.is-focused {
-    -webkit-backdrop-filter: blur(5px);
-    background: rgba(0, 0, 0, 0.25) !important;
-  }
-
-  .uk-search-large:not(.is-focused) .uk-search-input {
-    border-color: transparent;
   }
 </style>
 
