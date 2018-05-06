@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
+    "deploy": "aws s3 sync dist/ s3://thefinergifs.club --delete --profile finergifs",
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
