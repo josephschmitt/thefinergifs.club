@@ -1,9 +1,6 @@
 import axios from 'axios';
 import Vuex from 'vuex';
 
-let timeout;
-const WAIT = 250;
-
 export const state = () => ({
   page: 'index',
   isSearching: false,
@@ -35,15 +32,11 @@ export const mutations = {
 };
 
 export const actions = {
-  search({commit}, query) {
+  async search({commit}, query) {
     commit('updateSearchState', !!query);
-
-    clearTimeout(timeout);
-    timeout = setTimeout(async () => {
-      commit('updateLoadingState', true);
-      commit('refreshResults', await search(query));
-      commit('updateLoadingState', false);
-    }, WAIT);
+    commit('updateLoadingState', true);
+    commit('refreshResults', await search(query));
+    commit('updateLoadingState', false);
   }
 };
 

@@ -1,8 +1,8 @@
 <template>
   <div class="uk-container uk-container-large">
     <div class="results">
-      <result v-if="results" v-show="!isLoading" v-for="result in results" :key="result.id"
-          :result="result"></result>
+      <result v-if="results" v-show="!isLoading && isSearching" v-for="result in results"
+          :key="result.id" :result="result"></result>
     </div>
   </div>
 </template>
@@ -17,7 +17,7 @@
       Result,
     },
     computed: {
-      ...mapState(['results', 'isLoading'])
+      ...mapState(['results', 'isLoading', 'isSearching'])
     },
     methods: {
       getImageUrl(result) {
