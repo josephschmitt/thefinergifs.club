@@ -1,8 +1,10 @@
 <template>
   <div class="uk-container uk-container-large">
+    <vk-notification timeout="2000" :messages.sync="messages"></vk-notification>
     <div class="results">
       <result v-if="results" v-show="!isLoading && isSearching" v-for="result in results"
-          :key="result.id" :result="result"></result>
+          :key="result.id" :result="result" @copied="onCopied()">
+      </result>
     </div>
   </div>
 </template>
@@ -13,6 +15,11 @@
   import Result from './Result.vue';
 
   export default {
+    data() {
+      return {
+        messages: [],
+      };
+    },
     components: {
       Result,
     },
@@ -22,6 +29,9 @@
     methods: {
       getImageUrl(result) {
         return `https://cdn.thefinergifs.club/${result.fileid}.gif`;
+      },
+      onCopied() {
+        this.messages.push('Copied URL to clipboard');
       },
       ...mapActions(['search']),
     },

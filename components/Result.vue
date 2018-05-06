@@ -22,7 +22,6 @@
       },
     },
     methods: {
-
       onError() {
         this.removeResult(this.result);
       },
@@ -31,6 +30,7 @@
     mounted() {
       this.$el.querySelector('img').addEventListener('error', this.onError);
       this.cb = new ClipboardJS(this.$el);
+      this.cb.on('success', () => this.$emit('copied'));
     },
     beforeDestroy() {
       this.cb && this.cb.destroy();
