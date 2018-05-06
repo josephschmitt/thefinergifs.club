@@ -1,6 +1,5 @@
 <template>
-  <div class="uk-width-auto" :data-clipboard-text="imgurl">
-    <div class="label-center"><span class="uk-label">Click to copy URL</span></div>
+  <div class="uk-width-auto" v-vk-tooltip="'Click to copy URL'" :data-clipboard-text="imgurl">
     <img :src="imgurl" :alt="result.text">
   </div>
 </template>
@@ -45,25 +44,5 @@
 
   .uk-width-auto {
     position: relative;
-  }
-
-  .label-center {
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    top: 10px;
-    left: 0;
-    right: 0;
-  }
-
-  .uk-label {
-    display: none;
-    opacity: 0.85;
-  }
-
-  @media (hover: hover) {
-    .uk-width-auto:hover .uk-label {
-      display: inline-block;
-    }
   }
 </style>
