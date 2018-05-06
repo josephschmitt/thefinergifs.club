@@ -1,5 +1,5 @@
 <template>
-  <div class="uk-width-auto" v-vk-tooltip="'Click to copy URL'" :data-clipboard-text="imgurl">
+  <div class="uk-width-auto" v-vk-tooltip="tooltip" :data-clipboard-text="imgurl">
     <img :src="imgurl" :alt="result.text">
   </div>
 </template>
@@ -13,6 +13,7 @@
     data() {
       return {
         cb: null,
+        tooltip: {title: 'Click to copy URL', delay: 200},
       };
     },
     computed: {
@@ -21,7 +22,6 @@
       },
     },
     methods: {
-
       onError() {
         this.removeResult(this.result);
       },
