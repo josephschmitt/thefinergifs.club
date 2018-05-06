@@ -1,9 +1,9 @@
 <template>
-  <div class="uk-container uk-container-large">
-    <vk-grid class="uk-flex uk-flex-wrap uk-flex-center">
+  <div class="uk-container uk-container-large uk-margin-large-top">
+    <div class="results">
       <result v-if="results" v-for="result in results" :key="result.id"
           :result="result"></result>
-    </vk-grid>
+    </div>
   </div>
 </template>
 
@@ -34,5 +34,12 @@
 <style>
   .uk-flex-wrap {
     position: relative;
+  }
+
+  .results {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 400px));
+    grid-gap: 20px;
+    justify-content: center;
   }
 </style>

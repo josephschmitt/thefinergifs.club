@@ -1,5 +1,5 @@
 <template>
-  <div class="background-video" :class="{'is-searching': isSearching}">
+  <div class="background" :class="{'is-searching': isSearching}">
     <video width="100%" height="100%" autoplay muted loop>
       <source src="~/assets/finer-things-club-web.mp4" type="video/mp4">
     </video>
@@ -28,7 +28,7 @@
     opacity: 0;
   }
 
-  .background-video {
+  .background {
     position: fixed;
     top: 0;
     right: 0;
@@ -41,7 +41,7 @@
     background-size: cover;
   }
 
-  .background-video:after {
+  .background:after {
     content: '';
     position: absolute;
     top: -100%;
@@ -52,7 +52,7 @@
     background: rgba(0, 0, 0, 0.5);
   }
 
-  .is-searching .background-video:after {
+  .is-searching .background:after {
     background: rgba(0, 0, 0, 0.3);
   }
 </style>

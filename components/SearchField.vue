@@ -1,14 +1,17 @@
 <template>
-  <div class="uk-flex uk-flex-stretch uk-flex-column">
-    <form class="uk-search"
-        v-bind:class="searchFieldClass"
-        v-on:submit.prevent="onSubmit">
-      <span class="uk-search-icon uk-icon" :class="{'is-mobile': isMobile}">
-        <vk-icon icon="search" :ratio="isMobile ? 1 : 2"></vk-icon>
-      </span>
-      <input class="uk-search-input" type="search" placeholder="Search for a quote from The Office..."
-          autofocus v-model="query" v-on:input="onQueryChange()">
-    </form>
+  <div>
+    <div class="uk-flex uk-flex-stretch uk-flex-column"
+        :class="{'uk-container uk-container-small': !isSearching}">
+      <form class="uk-search"
+          v-bind:class="searchFieldClass"
+          v-on:submit.prevent="onSubmit">
+        <span class="uk-search-icon uk-icon" :class="{'is-mobile': isMobile}">
+          <vk-icon icon="search" :ratio="isMobile ? 1 : 2"></vk-icon>
+        </span>
+        <input class="uk-search-input" type="search" placeholder="Search for a quote from The Office..."
+            autofocus v-model="query" v-on:input="onQueryChange()">
+      </form>
+    </div>
   </div>
 </template>
 
@@ -29,7 +32,11 @@
     },
     methods: {
       onQueryChange() {
-        this.$router.push({query: {q: this.query}});
+        if (this.query) {
+          this.$router.push({name: 'search', query: {q: this.query}});
+        } else {
+          this.$router.push({name: 'index'});
+        }
       },
       onResizeSensor() {
         // this.isMobile = this.$el.clientWidth < 650;
@@ -45,7 +52,7 @@
           'uk-search uk-search-navbar': this.isMobile,
         };
       },
-      ...mapState(['isMobile']),
+      ...mapState(['isMobile', 'isSearching']),
     },
     created() {
       this.query = (this.$route.query || {}).q || '';

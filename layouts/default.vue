@@ -1,8 +1,27 @@
 <template>
-  <div class="app-container">
-    <nuxt class="uk-light uk-background-secondary" />
+  <div class="app-container" :class="{'is-searching': isSearching}">
+    <background></background>
+    <search-field class="search-field"></search-field>
+    <nuxt class="uk-light uk-background-secondary page-container" />
   </div>
 </template>
+
+<script>
+  import {mapState} from 'vuex'
+
+  import Background from '~/components/Background.vue';
+  import SearchField from '~/components/SearchField.vue';
+
+  export default {
+    components: {
+      Background,
+      SearchField,
+    },
+    computed: {
+      ...mapState(['isSearching']),
+    },
+  };
+</script>
 
 <style>
   html {
@@ -38,6 +57,16 @@
   }
 
   .app-container {
-    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .app-container .search-field {
+    order: 1;
+  }
+
+  .app-container.is-searching .search-field {
+    order: 0;
   }
 </style>
