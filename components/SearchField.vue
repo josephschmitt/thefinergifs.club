@@ -3,10 +3,11 @@
     <form class="uk-search uk-search-navbar"
         :class="searchFieldClass"
         @submit.prevent="onSubmit">
-      <vk-icon class="uk-search-icon" icon="search" :ratio="isMobile ? 1 : 2"></vk-icon>
+      <vk-icon class="uk-search-icon" icon="search" :ratio="iconRatio"></vk-icon>
       <input class="uk-search-input" type="search"
           :placeholder="placeholder" autofocus
           v-model="query" v-on:input="onQueryChange()">
+      <vk-spinner :ratio="iconRatio" v-if="isLoading"></vk-spinner>
     </form>
     <hr class="uk-divider-icon" v-if="isSearching">
   </div>
@@ -36,6 +37,9 @@
       },
     },
     computed: {
+      iconRatio() {
+        return this.isMobile ? 1 : 2;
+      },
       placeholder() {
         return this.isMobile ? 'Search quote...' : 'Search for a quote from The Office...';
       },
@@ -45,7 +49,7 @@
           'uk-search-large': !this.isMobile,
         };
       },
-      ...mapState(['isMobile', 'isSearching']),
+      ...mapState(['isMobile', 'isSearching', 'isLoading']),
     },
     created() {
       this.query = (this.$route.query || {}).q || '';
@@ -57,8 +61,8 @@
 </script>
 
 <style scoped>
-  .icon {
-    display: inline-block;
+  .uk-search-navbar {
+    display: flex;
   }
 
   .uk-search,

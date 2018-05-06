@@ -7,6 +7,7 @@ const WAIT = 250;
 export const state = () => ({
   page: 'index',
   isSearching: false,
+  isLoading: false,
   isMobile: false,
   results: [],
 });
@@ -17,6 +18,9 @@ export const mutations = {
   },
   updateSearchState(state, isSearching) {
     state.isSearching = isSearching;
+  },
+  updateLoadingState(state, isLoading) {
+    state.isLoading = isLoading;
   },
   updateMobileState(state, isMobile) {
     state.isMobile = isMobile;
@@ -35,7 +39,11 @@ export const actions = {
     commit('updateSearchState', !!query);
 
     clearTimeout(timeout);
-    timeout = setTimeout(async () => commit('refreshResults', await search(query)), WAIT);
+    timeout = setTimeout(async () => {
+      commit('updateLoadingState', true);
+      commit('refreshResults', await search(query));
+      commit('updateLoadingState', false);
+    }, WAIT);
   }
 };
 
