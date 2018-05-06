@@ -39,7 +39,7 @@
     min-height: 100%;
     background-image: url('~/assets/Balg6Fx-damask-desktop-wallpaper.jpg');
     background-repeat:  no-repeat;
-    background-position: center center;
+    background-position: top center;
     background-size: cover;
   }
 

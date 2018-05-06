@@ -6,7 +6,7 @@
         'uk-container-small': !isSearching,
       }">
     <background></background>
-    <search-field class="uk-margin-top search-field"></search-field>
+    <search-field class="search-field"></search-field>
     <nuxt class="uk-margin-top page-container" />
   </div>
 </template>

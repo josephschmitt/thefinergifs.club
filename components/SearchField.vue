@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div :class="{'sticky': isSearching}">
+    <div class="search-field-bg" :class="{'is-searching': isSearching}"></div>
     <form class="uk-search uk-search-navbar"
         :class="searchFieldClass"
         @submit.prevent="performSearch()">
@@ -82,15 +83,48 @@
   }
 
   .uk-container-small .uk-search {
-    margin-left: -20px;
+    margin-left: -10px;
   }
 
   .uk-container-small .uk-search-large {
-    margin-left: -40px;
+    margin-left: -20px;
   }
 
   .uk-search-large .uk-search-input {
     font-size: 34px;
+  }
+
+  .search-field {
+    position: relative;
+    padding-top: 10px;
+  }
+
+  .search-field-bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    background-image: url('~/assets/Balg6Fx-damask-desktop-wallpaper.jpg');
+    background-repeat:  no-repeat;
+    background-position: top center;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+  }
+
+  .search-field-bg.is-searching {
+    transition: opacity 150ms ease 100ms;
+    opacity: 1;
+  }
+
+  .sticky {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  hr {
+    margin: 10px 0;
   }
 </style>
 
