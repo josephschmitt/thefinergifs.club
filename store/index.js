@@ -45,5 +45,5 @@ async function search(query) {
     params: {q: query},
   });
 
-  return data.hits.hit;
+  return data.results;
 }
