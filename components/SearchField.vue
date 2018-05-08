@@ -65,8 +65,6 @@
     },
     created() {
       this.query = (this.$route.query || {}).q || '';
-      this.updateLoadingState(false);
-      this.search({query: this.query, page: this.$route.query.page, size: this.$route.query.size});
     },
     mounted() {
       this.$el.querySelector('input[type="search"]').focus();

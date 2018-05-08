@@ -6,15 +6,18 @@
 
 <script>
   import SearchResults from '~/components/SearchResults.vue';
+  import searchQuery from '~/middleware/searchQuery.js';
 
   export default {
     components: {
       SearchResults,
     },
-    fetch ({route, redirect}) {
-      if (!route.query.q) {
-        redirect('/');
+    async fetch (context) {
+      if (!context.route.query.q) {
+        return context.redirect('/');
       }
+
+      await searchQuery(context);
     }
   };
 </script>

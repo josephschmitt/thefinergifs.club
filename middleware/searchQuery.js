@@ -1,4 +1,4 @@
-export default function (context) {
+export default async function searchQuery(context) {
   const {q: query, page, size} = context.route.query;
-  context.store.dispatch('search', {query, page, size});
+  await context.store.dispatch('search', {query, page, size});
 }
