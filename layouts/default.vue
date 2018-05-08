@@ -7,7 +7,10 @@
       }">
     <background></background>
     <search-field class="search-field"></search-field>
-    <nuxt class="page-container" :class="{'uk-margin-medium-top': !isMobile}" />
+    <nuxt class="page-container" :class="{
+      'uk-margin-medium-top': !isMobile,
+      'uk-margin-top': isMobile && !isSearching
+    }" />
   </div>
 </template>
 

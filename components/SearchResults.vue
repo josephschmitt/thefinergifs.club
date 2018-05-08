@@ -1,7 +1,7 @@
 <template>
   <div class="uk-container uk-container-large">
     <vk-notification :timeout="2000" :messages.sync="messages"></vk-notification>
-    <p class="uk-margin-remove-top uk-text-meta" v-if="isMobile">
+    <p class="uk-margin-remove-top uk-text-meta" v-if="isMobile && results && results.length">
       Tap on a clip to copy the link to your clipboard.
     </p>
     <div class="results" :class="{'no-results': noResults}">
