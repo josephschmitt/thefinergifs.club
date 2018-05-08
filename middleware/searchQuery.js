@@ -1,3 +1,4 @@
 export default function (context) {
-  context.store.dispatch('search', context.route.query.q);
+  const {q: query, page, size} = context.route.query;
+  context.store.dispatch('search', {query, page, size});
 }

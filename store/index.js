@@ -1,13 +1,19 @@
 import axios from 'axios';
 import Vuex from 'vuex';
 
-export const state = () => ({
-  page: 'index',
-  isSearching: false,
-  isLoading: false,
-  isMobile: false,
-  results: [],
-});
+export const ITEMS_PER_PAGE = 10;
+
+export const state = () => {
+  return {
+    page: 'index',
+    isSearching: false,
+    isLoading: false,
+    isMobile: false,
+    results: [],
+    resultsCount: 0,
+    currentPage: 0,
+  };
+};
 
 export const mutations = {
   updatePage(state, page) {
@@ -22,6 +28,12 @@ export const mutations = {
   updateMobileState(state, isMobile) {
     state.isMobile = isMobile;
   },
+  updateCurrentPage(state, index) {
+    state.currentPage = index;
+  },
+  updateResultsCount(state, count) {
+    state.resultsCount = count;
+  },
   refreshResults(state, results) {
     state.results = results.map(({fields}) => fields);
   },
@@ -32,18 +44,27 @@ export const mutations = {
 };
 
 export const actions = {
-  async search({commit}, query) {
+  async search({commit}, params) {
+    const {query, page} = params;
+
     commit('updateSearchState', !!query);
     commit('updateLoadingState', true);
-    commit('refreshResults', await search(query));
+
+    const {results, hits} = await search(params);
+
+    commit('refreshResults', results);
+
+    commit('updateCurrentPage', hits.start);
+    commit('updateResultsCount', hits.found);
     commit('updateLoadingState', false);
   }
 };
 
-async function search(query) {
+async function search({query, page = 1, size = ITEMS_PER_PAGE}) {
   const {data} = await axios.get('https://api.thefinergifs.club/search', {
-    params: {q: query},
+    params: {
+      q: query, start: (page - 1) * ITEMS_PER_PAGE, size},
   });
 
-  return data.results;
+  return data;
 }

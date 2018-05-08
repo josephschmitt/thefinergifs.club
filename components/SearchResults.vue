@@ -1,19 +1,21 @@
 <template>
   <div class="uk-container uk-container-large">
-    <vk-notification timeout="2000" :messages.sync="messages"></vk-notification>
+    <vk-notification :timeout="2000" :messages.sync="messages"></vk-notification>
     <div class="results" :class="{'no-results': noResults}">
       <result v-if="results" v-show="!isLoading && isSearching" v-for="result in results"
           :key="result.id" :result="result" @copied="onCopied()">
       </result>
       <h2 v-if="noResults">No Results</h2>
     </div>
+    <search-pagination></search-pagination>
   </div>
 </template>
 
 <script>
-  import {mapActions, mapState} from 'vuex';
+  import {mapState} from 'vuex';
 
   import Result from './Result.vue';
+  import SearchPagination from './SearchPagination.vue';
 
   export default {
     data() {
@@ -23,6 +25,7 @@
     },
     components: {
       Result,
+      SearchPagination,
     },
     computed: {
       noResults() {
@@ -37,11 +40,7 @@
       onCopied() {
         this.messages.push('Copied URL to clipboard');
       },
-      ...mapActions(['search']),
     },
-    created() {
-      this.search((this.$route.query || {}).q || '');
-    }
   };
 </script>
 

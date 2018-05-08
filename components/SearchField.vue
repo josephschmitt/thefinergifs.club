@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  import {mapMutations, mapState} from 'vuex';
+  import {mapMutations, mapState, mapActions} from 'vuex';
   import {IconSearch} from '@vuikit/icons';
 
   let timeout;
@@ -45,6 +45,7 @@
           this.$router.push({name: 'index'});
         }
       },
+      ...mapActions(['search']),
       ...mapMutations(['updateSearchState', 'updateLoadingState']),
     },
     computed: {
@@ -65,6 +66,7 @@
     created() {
       this.query = (this.$route.query || {}).q || '';
       this.updateLoadingState(false);
+      this.search({query: this.query, page: this.$route.query.page, size: this.$route.query.size});
     },
     mounted() {
       this.$el.querySelector('input[type="search"]').focus();
