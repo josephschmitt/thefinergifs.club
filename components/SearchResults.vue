@@ -1,12 +1,11 @@
 <template>
   <div class="uk-container uk-container-large">
-    <vk-notification :timeout="2000" :messages.sync="messages"></vk-notification>
     <p class="uk-margin-remove-top uk-text-meta" v-if="isMobile && results && results.length">
       Tap on a clip to copy the link to your clipboard.
     </p>
     <div class="results" :class="{'no-results': noResults}">
       <result v-if="results" v-show="!isLoading && isSearching" v-for="result in results"
-          :key="result.id" :result="result" @copied="onCopied()">
+          :key="result.id" :result="result">
       </result>
       <h2 v-if="noResults">No Results</h2>
     </div>
@@ -21,11 +20,6 @@
   import SearchPagination from './SearchPagination.vue';
 
   export default {
-    data() {
-      return {
-        messages: [],
-      };
-    },
     components: {
       Result,
       SearchPagination,
@@ -39,9 +33,6 @@
     methods: {
       getImageUrl(result) {
         return `https://cdn.thefinergifs.club/${result.fileid}.gif`;
-      },
-      onCopied() {
-        this.messages.push('Copied URL to clipboard');
       },
     },
   };
@@ -59,5 +50,9 @@
 
   .no-results {
     grid-template-columns: 1fr;
+  }
+
+  .uk-notification-message {
+    z-index: 3;
   }
 </style>

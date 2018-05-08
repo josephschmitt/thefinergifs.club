@@ -12,6 +12,7 @@ export const state = () => {
     results: [],
     resultsCount: 0,
     currentPage: 0,
+    notifications: [],
   };
 };
 
@@ -33,6 +34,12 @@ export const mutations = {
   },
   updateResultsCount(state, count) {
     state.resultsCount = count;
+  },
+  showNotification(state, message) {
+    state.notifications.push(message);
+  },
+  setNotifications(state, notifications) {
+    state.notifications = notifications;
   },
   refreshResults(state, results) {
     state.results = results.map(({fields}) => fields);

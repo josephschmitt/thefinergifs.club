@@ -26,12 +26,12 @@
       onError() {
         this.removeResult(this.result);
       },
-      ...mapMutations(['removeResult']),
+      ...mapMutations(['removeResult', 'showNotification']),
     },
     mounted() {
       this.$el.querySelector('img').addEventListener('error', this.onError);
       this.cb = new ClipboardJS(this.$el);
-      this.cb.on('success', () => this.$emit('copied'));
+      this.cb.on('success', () => this.showNotification('Copied URL to clipboard'));
     },
     beforeDestroy() {
       this.cb && this.cb.destroy();

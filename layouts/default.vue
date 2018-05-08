@@ -7,6 +7,8 @@
       }">
     <background></background>
     <search-field class="search-field"></search-field>
+    <vk-notification :timeout="2000" :messages="notifications"
+        @update:messages="setNotifications($event)"></vk-notification>
     <nuxt class="page-container" :class="{
       'uk-margin-medium-top': !isMobile,
       'uk-margin-top': isMobile && !isSearching
@@ -27,13 +29,13 @@
       SearchField,
     },
     computed: {
-      ...mapState(['isSearching', 'isMobile']),
+      ...mapState(['isSearching', 'isMobile', 'notifications']),
     },
     methods: {
       onResizeSensor() {
         this.updateMobileState(this.$el.clientWidth < 650);
       },
-      ...mapMutations(['updateMobileState']),
+      ...mapMutations(['updateMobileState', 'setNotifications']),
     },
     mounted() {
       this.rs = new ResizeSensor(this.$el, this.onResizeSensor);
