@@ -1,9 +1,9 @@
 <template>
-  <vk-pagination class="uk-margin-large-top" :page.sync="page" :perPage="perPage" :total="resultsCount"
-      v-show="resultsCount > perPage">
-    <vk-pagination-page-prev label="Previous" expanded></vk-pagination-page-prev>
+  <vk-pagination class="uk-margin-large-top" align="center" :page.sync="page" :perPage="perPage"
+      :total="resultsCount" v-show="resultsCount > perPage">
+    <vk-pagination-page-prev label="Previous"></vk-pagination-page-prev>
     <vk-pagination-pages></vk-pagination-pages>
-    <vk-pagination-page-next label="Next" expanded></vk-pagination-page-next>
+    <vk-pagination-page-next label="Next"></vk-pagination-page-next>
   </vk-pagination>
 </template>
 
