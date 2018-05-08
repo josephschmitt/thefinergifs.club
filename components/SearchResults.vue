@@ -50,7 +50,7 @@
 <style>
   .results {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 400px));
+    grid-template-columns: repeat(auto-fill, minmax(290px, 400px));
     grid-gap: 20px;
     justify-content: center;
     position: relative;
