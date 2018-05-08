@@ -51,6 +51,7 @@
   .results {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(290px, 400px));
+    grid-template-rows: repeat(auto-fill, minmax(160px, 225px));
     grid-gap: 20px;
     justify-content: center;
     position: relative;
