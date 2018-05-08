@@ -30,11 +30,6 @@
       },
       ...mapState(['results', 'isLoading', 'isSearching', 'isMobile'])
     },
-    methods: {
-      getImageUrl(result) {
-        return `https://cdn.thefinergifs.club/${result.fileid}.gif`;
-      },
-    },
   };
 </script>
 

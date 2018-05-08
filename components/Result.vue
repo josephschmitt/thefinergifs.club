@@ -19,7 +19,7 @@
     },
     computed: {
       imgurl() {
-        return `https://cdn.thefinergifs.club/${this.result.fileid}.gif`;
+        return `${process.env.CDN_BASE_URL}/${this.result.fileid}.gif`;
       },
     },
     methods: {

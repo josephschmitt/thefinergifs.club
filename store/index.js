@@ -68,7 +68,7 @@ export const actions = {
 };
 
 async function search({query, page = 1, size = ITEMS_PER_PAGE}) {
-  const {data} = await axios.get('https://api.thefinergifs.club/search', {
+  const {data} = await axios.get(process.env.API_BASE_URL + '/search', {
     params: {
       q: query, start: (page - 1) * ITEMS_PER_PAGE, size},
   });
