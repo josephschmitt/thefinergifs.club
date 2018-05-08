@@ -7,7 +7,7 @@
       }">
     <background></background>
     <search-field class="search-field"></search-field>
-    <nuxt class="uk-margin-top page-container" />
+    <nuxt class="page-container" :class="{'uk-margin-medium-top': !isMobile}" />
   </div>
 </template>
 
@@ -24,7 +24,7 @@
       SearchField,
     },
     computed: {
-      ...mapState(['isSearching']),
+      ...mapState(['isSearching', 'isMobile']),
     },
     methods: {
       onResizeSensor() {
@@ -84,5 +84,10 @@
 
   .app-container.is-searching .search-field {
     order: 0;
+  }
+
+  .page-container {
+    position: relative;
+    z-index: 1;
   }
 </style>

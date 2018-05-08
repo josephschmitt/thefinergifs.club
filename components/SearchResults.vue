@@ -1,6 +1,9 @@
 <template>
   <div class="uk-container uk-container-large">
     <vk-notification :timeout="2000" :messages.sync="messages"></vk-notification>
+    <p class="uk-margin-remove-top uk-text-meta" v-if="isMobile">
+      Tap on a clip to copy the link to your clipboard.
+    </p>
     <div class="results" :class="{'no-results': noResults}">
       <result v-if="results" v-show="!isLoading && isSearching" v-for="result in results"
           :key="result.id" :result="result" @copied="onCopied()">
@@ -31,7 +34,7 @@
       noResults() {
         return (!this.results || !this.results.length) && !this.isLoading && this.isSearching;
       },
-      ...mapState(['results', 'isLoading', 'isSearching'])
+      ...mapState(['results', 'isLoading', 'isSearching', 'isMobile'])
     },
     methods: {
       getImageUrl(result) {
@@ -45,10 +48,6 @@
 </script>
 
 <style>
-  .uk-flex-wrap {
-    position: relative;
-  }
-
   .results {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 400px));
