@@ -11,6 +11,11 @@
     components: {
       SearchResults,
     },
+    fetch ({route, redirect}) {
+      if (!route.query.q) {
+        redirect('/');
+      }
+    }
   };
 </script>
 
