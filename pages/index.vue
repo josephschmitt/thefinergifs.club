@@ -16,7 +16,7 @@
       'is-searching': isSearching,
       'uk-container uk-container-small': !isSearching,
     }"></search-field>
-    <search-results class="uk-margin"></search-results>
+    <search-results class="uk-margin" v-show="isSearching"></search-results>
   </div>
 </template>
 

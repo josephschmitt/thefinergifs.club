@@ -41,10 +41,8 @@ export const mutations = {
   setNotifications(state, notifications) {
     state.notifications = notifications;
   },
-  refreshResults(state, results = []) {
-    if (results) {
-      state.results = results.map(({fields}) => fields);
-    }
+  refreshResults(state, results) {
+    state.results = Array.isArray(results) ? results.map(({fields}) => fields) : [];
   },
   removeResult(state, result) {
     const index = state.results.indexOf(result);
@@ -57,15 +55,22 @@ export const actions = {
     const {query, page} = params;
 
     commit('updateSearchState', !!query);
-    commit('updateLoadingState', true);
 
-    const {results, hits} = await search(params);
+    if (query) {
+      commit('updateLoadingState', true);
 
-    commit('refreshResults', results);
+      const {results, hits} = await search(params);
 
-    commit('updateCurrentPage', hits.start);
-    commit('updateResultsCount', hits.found);
-    commit('updateLoadingState', false);
+      commit('refreshResults', results);
+
+      commit('updateCurrentPage', hits.start);
+      commit('updateResultsCount', hits.found);
+      commit('updateLoadingState', false);
+    } else {
+      commit('refreshResults', null);
+      commit('updateCurrentPage', 0);
+      commit('updateResultsCount', 0);
+    }
   }
 };
 
