@@ -1,11 +1,9 @@
 <template>
-  <div class="page-container" :class="{
-      'uk-margin-top': isMobile && !isSearching
-    }">
+  <div class="page-container">
     <vk-notification :timeout="2000" :messages="notifications"
         @update:messages="setNotifications($event)"></vk-notification>
     <background></background>
-    <div class="uk-container" :class="{
+    <div class="uk-container uk-margin-top" :class="{
       'is-searching': isSearching,
       'uk-container-expand': isSearching,
       'uk-container-small': !isSearching,
