@@ -1,18 +1,6 @@
 <template>
-  <div class="uk-light uk-background-secondary uk-container app-container"
-      :class="{
-        'is-searching': isSearching,
-        'uk-container-expand': isSearching,
-        'uk-container-small': !isSearching,
-      }">
-    <background></background>
-    <search-field class="search-field"></search-field>
-    <vk-notification :timeout="2000" :messages="notifications"
-        @update:messages="setNotifications($event)"></vk-notification>
-    <nuxt class="page-container" :class="{
-      'uk-margin-medium-top': !isMobile,
-      'uk-margin-top': isMobile && !isSearching
-    }" />
+  <div class="uk-light uk-background-secondary app-container">
+    <nuxt />
   </div>
 </template>
 
@@ -20,22 +8,15 @@
   import {ResizeSensor} from 'css-element-queries';
   import {mapMutations, mapState} from 'vuex'
 
-  import Background from '~/components/Background.vue';
-  import SearchField from '~/components/SearchField.vue';
-
   export default {
-    components: {
-      Background,
-      SearchField,
-    },
     computed: {
-      ...mapState(['isSearching', 'isMobile', 'notifications']),
+      ...mapState(['isSearching', 'isMobile']),
     },
     methods: {
       onResizeSensor() {
         this.updateMobileState(this.$el.clientWidth < 650);
       },
-      ...mapMutations(['updateMobileState', 'setNotifications']),
+      ...mapMutations(['updateMobileState']),
     },
     mounted() {
       this.rs = new ResizeSensor(this.$el, this.onResizeSensor);
@@ -81,18 +62,5 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-  }
-
-  .app-container .search-field {
-    order: 1;
-  }
-
-  .app-container.is-searching .search-field {
-    order: 0;
-  }
-
-  .page-container {
-    position: relative;
-    z-index: 1;
   }
 </style>

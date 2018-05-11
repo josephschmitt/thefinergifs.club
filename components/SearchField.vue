@@ -40,9 +40,9 @@
         this.updateSearchState(!!this.query);
 
         if (this.query) {
-          this.$router.push({name: 'search', query: {q: this.query}});
+          this.$router.push({query: {q: this.query}});
         } else {
-          this.$router.push({name: 'index'});
+          this.$router.push({query: null});
         }
       },
       ...mapActions(['search']),
