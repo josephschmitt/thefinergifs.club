@@ -41,8 +41,10 @@ export const mutations = {
   setNotifications(state, notifications) {
     state.notifications = notifications;
   },
-  refreshResults(state, results) {
-    state.results = results.map(({fields}) => fields);
+  refreshResults(state, results = []) {
+    if (results) {
+      state.results = results.map(({fields}) => fields);
+    }
   },
   removeResult(state, result) {
     const index = state.results.indexOf(result);
