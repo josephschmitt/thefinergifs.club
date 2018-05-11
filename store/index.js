@@ -63,12 +63,12 @@ export const actions = {
 
       commit('refreshResults', results);
 
-      commit('updateCurrentPage', hits.start);
+      commit('updateCurrentPage', (hits.start / ITEMS_PER_PAGE) + 1);
       commit('updateResultsCount', hits.found);
       commit('updateLoadingState', false);
     } else {
       commit('refreshResults', null);
-      commit('updateCurrentPage', 0);
+      commit('updateCurrentPage', 1);
       commit('updateResultsCount', 0);
     }
   }
