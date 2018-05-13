@@ -52,11 +52,7 @@
 </script>
 
 <style scoped>
-  .page-container {
-    position: relative;
-    z-index: 1;
-  }
-
+  .page-container,
   .uk-container {
     position: relative;
     z-index: 1;

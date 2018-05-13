@@ -7,8 +7,9 @@ module.exports = {
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      {hid: 'description', name: 'description',
-          content: 'The Finer Gifs Club: Find the finest gifs from The Office.'}
+      {hid: 'description', name: 'description', content: 'The Finer Gifs Club: Find the finest ' +
+          'gifs from The Office. There is no paper, no plastic and no work talk allowed. It\'s ' +
+          'very exclusive.'}
     ],
     link: [
       {rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png'},

@@ -1,6 +1,9 @@
-# thefinerthings.club
+# [thefinerthings.club](http://thefinerthings.club)
 
-> Nuxt.js project containing the source that builds [thefinerthings.club](http://thefinerthings.club) website.
+> Return to another age: a time of refinement and civility.
+
+This is a Nuxt.js project containing front-end web UI for searching for gifs from the American show
+The Office at [thefinerthings.club](http://thefinerthings.club).
 
 ## Build Setup
 
