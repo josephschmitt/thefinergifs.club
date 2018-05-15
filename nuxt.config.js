@@ -1,15 +1,12 @@
 module.exports = {
-  /*
-  ** Headers of the page
-  */
   head: {
-    title: 'The Finer Gifs Club',
+    title: 'The Finer Gifs Club: Only the finest gifs from The Office (US)',
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      {hid: 'description', name: 'description', content: 'The Finer Gifs Club: Find the finest ' +
-          'gifs from The Office. There is no paper, no plastic and no work talk allowed. It\'s ' +
-          'very exclusive.'}
+      {hid: 'description', name: 'description', content: 'Return to another age: a time of ' +
+          'refinement and civility and gifs. There is no paper, no plastic and no work talk ' +
+          'allowed. It\'s very exclusive.'}
     ],
     link: [
       {rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png'},
@@ -23,24 +20,24 @@ module.exports = {
   css: [
     '~~/node_modules/@vuikit/theme/dist/vuikit.min.css',
   ],
-  /*
-  ** Customize the progress bar color
-  */
   loading: { color: '#3B8070' },
   router: {
     middleware: 'searchQuery',
   },
   plugins: [
-    // ssr: false to only include it on client-side
     {src: '~/plugins/vuikit.js', ssr: false},
   ],
-  /*
-  ** Build configuration
-  */
+  modules: [
+    ['@nuxtjs/google-analytics'],
+  ],
+  'google-analytics': {
+    id: 'UA-38697886-2',
+  },
+  env: {
+    CDN_BASE_URL: process.env.CDN_BASE_URL || 'https://cdn.thefinergifs.club',
+    API_BASE_URL: process.env.API_BASE_URL || 'https://api.thefinergifs.club',
+  },
   build: {
-    /*
-    ** Run ESLint on save
-    */
     extend (config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({
@@ -52,8 +49,4 @@ module.exports = {
       }
     }
   },
-  env: {
-    CDN_BASE_URL: process.env.CDN_BASE_URL || 'https://cdn.thefinergifs.club',
-    API_BASE_URL: process.env.API_BASE_URL || 'https://api.thefinergifs.club',
-  }
 }
