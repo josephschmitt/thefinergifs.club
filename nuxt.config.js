@@ -33,10 +33,6 @@ module.exports = {
   'google-analytics': {
     id: 'UA-38697886-2',
   },
-  env: {
-    CDN_BASE_URL: process.env.CDN_BASE_URL || 'https://cdn.thefinergifs.club',
-    API_BASE_URL: process.env.API_BASE_URL || 'https://api.thefinergifs.club',
-  },
   build: {
     extend (config, { isDev, isClient }) {
       if (isDev && isClient) {
@@ -49,4 +45,8 @@ module.exports = {
       }
     }
   },
+  env: {
+    CDN_BASE_URL: process.env.CDN_BASE_URL || 'https://media.thefinergifs.club',
+    API_BASE_URL: process.env.API_BASE_URL || 'https://api.thefinergifs.club',
+  }
 }
