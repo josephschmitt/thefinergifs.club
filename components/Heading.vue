@@ -24,11 +24,8 @@
 </script>
 
 <style scoped>
-  .tabs {
-    margin-left: auto;
-  }
-
   h2 {
+    margin-right: auto;
     filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.25));
   }
 </style>
