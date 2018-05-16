@@ -4,6 +4,7 @@ module.exports = {
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
+      {name: 'slack-app-id', content: 'AAP772L2D'},
       {hid: 'description', name: 'description', content: 'Return to another age: a time of ' +
           'refinement and civility and gifs. There is no paper, no plastic and no work talk ' +
           'allowed. It\'s very exclusive.'}
