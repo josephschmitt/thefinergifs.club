@@ -14,7 +14,6 @@
       'is-searching': isSearching,
       'uk-container uk-container-small': !isSearching,
     }"></search-field>
-    <add-to-slack class="uk-margin-large-top" v-show="!isSearching"></add-to-slack>
     <search-results class="uk-margin" v-show="isSearching"></search-results>
   </div>
 </template>
@@ -22,7 +21,6 @@
 <script>
   import {mapMutations, mapState} from 'vuex'
 
-  import AddToSlack from '~/components/AddToSlack.vue';
   import Background from '~/components/Background.vue';
   import Heading from '~/components/Heading.vue';
   import SearchField from '~/components/SearchField.vue';
@@ -39,7 +37,6 @@
       await searchQuery(context);
     },
     components: {
-      AddToSlack,
       Background,
       Heading,
       SearchField,
