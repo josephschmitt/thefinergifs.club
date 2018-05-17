@@ -1,6 +1,8 @@
 <template>
   <div :class="{'uk-margin-large-bottom': !isMobile}">
-    <div class="uk-flex uk-flex-left uk-flex-top uk-flex-nowrap">
+    <div class="uk-flex uk-flex-left uk-flex-top uk-flex-nowrap uk-margin-large-bottom" :class="{
+      'uk-flex-column': isMobile
+    }">
       <h2 :class="{'uk-text-large': isMobile}">
         The Finer Gifs Club <span class="uk-label">Beta</span>
       </h2>
@@ -31,7 +33,7 @@
 
 <style scoped>
   h2 {
-    margin-right: auto;
+    margin: 0 auto 0 0;
     filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.25));
   }
 </style>
