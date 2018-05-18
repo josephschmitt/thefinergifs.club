@@ -2,8 +2,11 @@
   <div :class="{'sticky': isSearching}">
     <div class="search-field-bg" :class="{'is-searching': isSearching}"></div>
     <form class="uk-search uk-search-navbar"
-        :class="searchFieldClass"
-        @submit.prevent="performSearch()">
+        :class="{
+          'is-focused': !!query,
+          'uk-search-large': !isMobile,
+          'uk-button-text': !isSearching,
+        }" @submit.prevent="performSearch()">
       <vk-icon class="uk-search-icon" icon="search" :ratio="iconRatio"></vk-icon>
       <input class="uk-search-input" type="search"
           :placeholder="placeholder" autofocus
@@ -54,12 +57,6 @@
       },
       placeholder() {
         return this.isMobile ? 'Search quote...' : 'Search for a quote from The Office...';
-      },
-      searchFieldClass() {
-        return {
-          'is-focused': !!this.query,
-          'uk-search-large': !this.isMobile,
-        };
       },
       ...mapState(['isMobile', 'isSearching', 'isLoading']),
     },
