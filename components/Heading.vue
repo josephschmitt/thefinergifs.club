@@ -3,9 +3,7 @@
     <div class="uk-flex uk-flex-left uk-flex-top uk-flex-nowrap uk-margin-large-bottom" :class="{
       'uk-flex-column': isMobile
     }">
-      <h2 :class="{'uk-text-large': isMobile}">
-        The Finer Gifs Club <span class="uk-label">Beta</span>
-      </h2>
+      <h2 :class="{'uk-text-large': isMobile}">The Finer Gifs Club</h2>
       <add-to-slack></add-to-slack>
       <vk-tabs class="uk-hidden uk-visible@m tabs" align="right">
         <vk-tabs-item title="Home"></vk-tabs-item>
