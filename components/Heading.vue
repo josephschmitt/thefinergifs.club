@@ -4,12 +4,11 @@
       'uk-flex-column': isMobile
     }">
       <h2 :class="{'uk-text-large': isMobile}">The Finer Gifs Club</h2>
-      <add-to-slack></add-to-slack>
-      <vk-tabs class="uk-hidden uk-visible@m tabs" align="right">
-        <vk-tabs-item title="Home"></vk-tabs-item>
-        <vk-tabs-item title="About" href="http://www.calvin.edu/~cjn8/dunder_mifflin/">
-        </vk-tabs-item>
-      </vk-tabs>
+      <add-to-slack class="tab-btn"></add-to-slack>
+      <div class="tab-btn">
+        <a class="uk-button uk-button-text uk-button-small uk-text-bold"
+            href="https://joe.sh/in-search-of-finer-gifs">What is this?</a>
+      </div>
     </div>
   </div>
 </template>
@@ -36,3 +35,22 @@
   }
 </style>
 
+<style>
+  .tab-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin-left: 30px;
+    position: relative;
+    top: 5px;
+  }
+
+  .tab-btn a {
+    padding: 10px 0;
+  }
+
+  .uk-flex-column .tab-btn {
+    margin-left: 0;
+  }
+</style>
