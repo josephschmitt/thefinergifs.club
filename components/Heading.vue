@@ -37,6 +37,11 @@
   .uk-flex.uk-flex-wrap {
     justify-content: flex-start;
   }
+
+  .uk-text-large {
+    width: 100%;
+    text-align: left;
+  }
 </style>
 
 <style>

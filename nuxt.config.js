@@ -7,7 +7,15 @@ module.exports = {
       {name: 'slack-app-id', content: 'AAP772L2D'},
       {hid: 'description', name: 'description', content: 'Return to another age: a time of ' +
           'refinement and civility and gifs. There is no paper, no plastic and no work talk ' +
-          'allowed. It\'s very exclusive.'}
+          'allowed. It\'s very exclusive.'},
+      {property: 'og:title',
+          content: 'The Finer Gifs Club: Only the finest gifs from The Office (US)'},
+      {property: 'og:description', content: 'Return to another age: a time of refinement and ' +
+          'civility and gifs. There is no paper, no plastic and no work talk allowed. It\'s very ' +
+          'exclusive.'},
+      {property: 'og:image', content:'/finer-things-club.jpg'},
+      {property: 'og:url', content: 'https://thefinerthings.club'},
+      {name: 'twitter:card', content: '/finer-things-club.jpg'},
     ],
     link: [
       {rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png'},
