@@ -36,6 +36,15 @@
 
       await searchQuery(context);
     },
+    head() {
+      const {q: query} = this.$route.query;
+
+      if (query) {
+        return {title: 'The Finer Gifs Club: ' + query};
+      }
+
+      return {title: 'The Finer Gifs Club: Only the finest gifs from The Office (US)'};
+    },
     components: {
       Background,
       Heading,
