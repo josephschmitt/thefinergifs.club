@@ -79,16 +79,21 @@
     width: 100%;
   }
 
-  .uk-container-small .uk-search {
-    margin-left: -10px;
+  .uk-search .uk-search-icon {
+    width: 20px;
   }
 
-  .uk-container-small .uk-search-large {
-    margin-left: -20px;
+  .uk-search .uk-search-input {
+    padding-left: 30px !important;
+  }
+
+  .uk-search-large .uk-search-icon {
+    width: 40px;
   }
 
   .uk-search-large .uk-search-input {
     font-size: 34px;
+    padding-left: 60px !important;
   }
 
   .search-field {
