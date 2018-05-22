@@ -1,7 +1,7 @@
 <template>
   <div :class="{'uk-margin-large-bottom': !isMobile}">
-    <div class="uk-flex uk-flex-left uk-flex-top uk-flex-nowrap uk-margin-large-bottom" :class="{
-      'uk-flex-column': isMobile
+    <div class="uk-flex uk-flex-left uk-flex-top uk-margin-large-bottom" :class="{
+      'uk-flex-wrap': isMobile
     }">
       <h2 :class="{'uk-text-large': isMobile}">The Finer Gifs Club</h2>
       <add-to-slack class="tab-btn"></add-to-slack>
@@ -33,6 +33,10 @@
     margin: 0 auto 0 0;
     filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.25));
   }
+
+  .uk-flex.uk-flex-wrap {
+    justify-content: flex-start;
+  }
 </style>
 
 <style>
@@ -50,7 +54,11 @@
     padding: 10px 0;
   }
 
-  .uk-flex-column .tab-btn {
+  .uk-flex-wrap .tab-btn {
     margin-left: 0;
+  }
+
+  .uk-flex-wrap .tab-btn:last-child {
+    margin-left: auto;
   }
 </style>
