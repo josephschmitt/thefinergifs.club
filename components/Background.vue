@@ -1,7 +1,7 @@
 <template>
   <div class="background" :class="{'is-searching': isSearching}">
     <video width="100%" height="100%" autoplay muted loop playsinline>
-      <source src="~/assets/finer-things-club-web.mp4" type="video/mp4">
+      <source src="/finer-things-club-web.mp4" type="video/mp4">
     </video>
   </div>
 </template>
