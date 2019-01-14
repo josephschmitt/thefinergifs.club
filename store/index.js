@@ -95,7 +95,7 @@ async function search({query, season, episode, page = 1, size = ITEMS_PER_PAGE})
       q,
       start: (page - 1) * ITEMS_PER_PAGE,
       size,
-      sort: query ? '_score asc' : 'fileid desc'
+      sort: query ? '_score desc' : 'fileid asc'
     },
   });
 
