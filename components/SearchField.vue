@@ -8,6 +8,39 @@
           'uk-button-text': !isSearching,
         }" @submit.prevent="performSearch()">
       <vk-icon class="uk-search-icon" icon="search" :ratio="iconRatio"></vk-icon>
+      <vk-drop class="uk-width-large uk-padding-small advanced-options" mode="click"
+          position="bottom-left">
+        <form class="uk-form-stacked">
+          <fieldset class="uk-fieldset uk-text-left">
+            <legend class="uk-legend">Advanced Options</legend>
+            <vk-grid class="uk-drop-grid" gutter="small">
+              <div class="uk-width-1-2">
+                <label class="uk-form-label uk-padding-small">Season</label>
+                <div class="uk-form-controls">
+                  <select class="uk-select" v-model="querySeason">
+                    <option>None</option>
+                    <option v-for="(episode, index) in episodes" v-bind:key="index"
+                        v-bind:value="index + 1">
+                      Season {{index + 1}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="uk-width-1-2">
+                <label class="uk-form-label uk-padding-small">Episode</label>
+                <div class="uk-form-controls">
+                  <select class="uk-select" v-model="queryEpisode" v-enabled="querySeason">
+                    <option v-if="querySeason" v-for="episode in episodesInSeason"
+                        v-bind:key="episode.number" v-bind:value="episode.number">
+                      {{episode.number}}: {{episode.title}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </vk-grid>
+          </fieldset>
+        </form>
+      </vk-drop>
       <input class="uk-search-input" type="search"
           :placeholder="placeholder" autofocus
           v-model="query" v-on:input="onQueryChange()">
@@ -20,6 +53,7 @@
 <script>
   import {mapMutations, mapState, mapActions} from 'vuex';
   import {IconSearch} from '@vuikit/icons';
+  import zeropad from 'zeropad';
 
   let timeout;
   const WAIT = 500;
@@ -32,6 +66,8 @@
       return {
         query: '',
         rs: null,
+        querySeason: 1,
+        queryEpisode: null
       };
     },
     methods: {
@@ -43,12 +79,13 @@
         this.updateSearchState(!!this.query);
 
         if (this.query) {
+          const epQuery = buildEpisodeQuery(this.querySeason, this.queryEpisode);
           this.$router.push({query: {q: this.query}});
         } else {
           this.$router.push({query: null});
         }
       },
-      ...mapActions(['search']),
+      ...mapActions(['search', 'loadEpisodes']),
       ...mapMutations(['updateSearchState', 'updateLoadingState']),
     },
     computed: {
@@ -58,14 +95,31 @@
       placeholder() {
         return this.isMobile ? 'Search quote...' : 'Search for a quote from The Office...';
       },
-      ...mapState(['isMobile', 'isSearching', 'isLoading']),
+      episodesInSeason() {
+        return this.querySeason && this.querySeason >= 0 ? this.episodes[this.querySeason - 1] : [];
+      },
+      ...mapState([
+        'isMobile',
+        'isSearching',
+        'isLoading',
+        'episodes'
+      ])
     },
     created() {
       this.query = (this.$route.query || {}).q || '';
     },
     mounted() {
       this.$el.querySelector('input[type="search"]').focus();
+      this.loadEpisodes();
     }
+  }
+
+  function buildEpisodeQuery(seasonNum, episodeNum) {
+    if (seasonNum && episodeNum) {
+      return `${zeropad(seasonNum)}x${zeropad(episodeNum)}`;
+    }
+
+    return null;
   }
 </script>
 
@@ -81,6 +135,7 @@
 
   .uk-search .uk-search-icon {
     width: 20px;
+    pointer-events: auto !important; /* The search icon shows the advanced search options */
   }
 
   .uk-search .uk-search-input {
@@ -127,6 +182,10 @@
 
   hr {
     margin: 5px 0 10px;
+  }
+
+  .advanced-options {
+    background: black;
   }
 </style>
 

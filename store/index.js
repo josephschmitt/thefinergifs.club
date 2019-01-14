@@ -1,4 +1,5 @@
 import axios from 'axios';
+import URL from 'url-parse';
 import Vuex from 'vuex';
 
 export const ITEMS_PER_PAGE = 10;
@@ -13,6 +14,7 @@ export const state = () => {
     resultsCount: 0,
     currentPage: 0,
     notifications: [],
+    episodes: [],
   };
 };
 
@@ -47,6 +49,9 @@ export const mutations = {
   removeResult(state, result) {
     const index = state.results.indexOf(result);
     state.results.splice(index, 1);
+  },
+  setEpisodes(state, episodes) {
+    state.episodes = episodes;
   }
 };
 
@@ -71,11 +76,16 @@ export const actions = {
       commit('updateCurrentPage', 1);
       commit('updateResultsCount', 0);
     }
-  }
+  },
+
+  async loadEpisodes({commit, state}) {
+    const {data} = (await axios.get('/episodes.json'));
+    commit('setEpisodes', data.episodes);
+  },
 };
 
 async function search({query, page = 1, size = ITEMS_PER_PAGE}) {
-  const {data} = await axios.get(process.env.API_BASE_URL + '/search', {
+  const {data} = await axios.get(new URL('search', process.env.API_BASE_URL).href, {
     params: {
       q: query, start: (page - 1) * ITEMS_PER_PAGE, size},
   });

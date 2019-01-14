@@ -56,6 +56,6 @@ module.exports = {
   },
   env: {
     CDN_BASE_URL: process.env.CDN_BASE_URL || 'https://media.thefinergifs.club',
-    API_BASE_URL: process.env.API_BASE_URL || 'https://api.thefinergifs.club',
+    API_BASE_URL: process.env.API_BASE_URL || 'https://api.thefinergifs.club'
   }
-}
+};
