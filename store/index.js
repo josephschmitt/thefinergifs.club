@@ -60,9 +60,10 @@ export const actions = {
   async search({commit}, params) {
     const {query, season, episode, page} = params;
 
-    commit('updateSearchState', !!query);
+    const searchState = !!query || !!(season && episode);
+    commit('updateSearchState', searchState);
 
-    if (query) {
+    if (searchState) {
       commit('updateLoadingState', true);
 
       const {results, hits} = await search(params);
@@ -86,19 +87,28 @@ export const actions = {
 };
 
 async function search({query, season, episode, page = 1, size = ITEMS_PER_PAGE}) {
-  const q = buildQuery(query, season, episode);
+  const q = buildQuery({query, season, episode});
+
   const url = new URL('search', process.env.API_BASE_URL).href;
   const {data} = await axios.get(url, {
     params: {
-      q, start: (page - 1) * ITEMS_PER_PAGE, size},
+      q,
+      start: (page - 1) * ITEMS_PER_PAGE,
+      size,
+      sort: query ? '_score asc' : 'fileid desc'
+    },
   });
 
   return data;
 }
 
-function buildQuery(query, seasonNum, episodeNum) {
-  const epQuery = seasonNum && episodeNum ? `(and (prefix field='fileid' ` +
-    `'${zeropad(seasonNum)}x${zeropad(episodeNum)}'))` : '';
+function buildQuery({query, season, episode}) {
+  const epQuery = season && episode ? `(and (prefix field='fileid' ` +
+    `'${zeropad(season)}x${zeropad(episode)}'))` : '';
 
-  return `(and (phrase field='text' '${query}') ${epQuery})`;
+  if (query) {
+    return `(and (phrase field='text' '${query}') ${epQuery})`;
+  }
+
+  return epQuery;
 }

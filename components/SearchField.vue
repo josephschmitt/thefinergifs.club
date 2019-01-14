@@ -17,8 +17,8 @@
               <div class="uk-width-1-2">
                 <label class="uk-form-label uk-padding-small">Season</label>
                 <div class="uk-form-controls">
-                  <select class="uk-select" v-model="querySeason">
-                    <option>None</option>
+                  <select class="uk-select" v-model="querySeason" v-on:input="onQueryChange()">
+                    <option disabled>--Choose Season--</option>
                     <option v-for="(episode, index) in episodes" v-bind:key="index"
                         v-bind:value="index + 1">
                       Season {{index + 1}}
@@ -29,7 +29,9 @@
               <div class="uk-width-1-2">
                 <label class="uk-form-label uk-padding-small">Episode</label>
                 <div class="uk-form-controls">
-                  <select class="uk-select" v-model="queryEpisode" v-enabled="querySeason">
+                  <select class="uk-select" v-model="queryEpisode" :disabled="!querySeason"
+                      v-on:input="onQueryChange()">
+                    <option disabled>--Choose Episode--</option>
                     <option v-if="querySeason" v-for="episode in episodesInSeason"
                         v-bind:key="episode.number" v-bind:value="episode.number">
                       {{episode.number}}: {{episode.title}}
@@ -75,9 +77,10 @@
         timeout = setTimeout(this.performSearch, WAIT);
       },
       performSearch() {
-        this.updateSearchState(!!this.query);
+        const isSearching = !!this.query || !!(this.querySeason && this.queryEpisode);
+        this.updateSearchState(isSearching);
 
-        if (this.query) {
+        if (isSearching) {
           this.$router.push({query: {
             q: this.query,
             season: this.querySeason,
