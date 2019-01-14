@@ -53,7 +53,6 @@
 <script>
   import {mapMutations, mapState, mapActions} from 'vuex';
   import {IconSearch} from '@vuikit/icons';
-  import zeropad from 'zeropad';
 
   let timeout;
   const WAIT = 500;
@@ -66,7 +65,7 @@
       return {
         query: '',
         rs: null,
-        querySeason: 1,
+        querySeason: null,
         queryEpisode: null
       };
     },
@@ -79,8 +78,11 @@
         this.updateSearchState(!!this.query);
 
         if (this.query) {
-          const epQuery = buildEpisodeQuery(this.querySeason, this.queryEpisode);
-          this.$router.push({query: {q: this.query}});
+          this.$router.push({query: {
+            q: this.query,
+            season: this.querySeason,
+            episode: this.queryEpisode
+          }});
         } else {
           this.$router.push({query: null});
         }
@@ -106,20 +108,16 @@
       ])
     },
     created() {
-      this.query = (this.$route.query || {}).q || '';
+      const routeQuery = this.$route.query || {};
+
+      this.query = routeQuery.q || '';
+      this.querySeason = routeQuery.season;
+      this.queryEpisode = routeQuery.episode;
     },
     mounted() {
       this.$el.querySelector('input[type="search"]').focus();
       this.loadEpisodes();
     }
-  }
-
-  function buildEpisodeQuery(seasonNum, episodeNum) {
-    if (seasonNum && episodeNum) {
-      return `${zeropad(seasonNum)}x${zeropad(episodeNum)}`;
-    }
-
-    return null;
   }
 </script>
 

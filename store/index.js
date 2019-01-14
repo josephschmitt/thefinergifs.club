@@ -1,6 +1,7 @@
 import axios from 'axios';
 import URL from 'url-parse';
 import Vuex from 'vuex';
+import zeropad from 'zeropad';
 
 export const ITEMS_PER_PAGE = 10;
 
@@ -57,7 +58,7 @@ export const mutations = {
 
 export const actions = {
   async search({commit}, params) {
-    const {query, page} = params;
+    const {query, season, episode, page} = params;
 
     commit('updateSearchState', !!query);
 
@@ -84,11 +85,20 @@ export const actions = {
   },
 };
 
-async function search({query, page = 1, size = ITEMS_PER_PAGE}) {
-  const {data} = await axios.get(new URL('search', process.env.API_BASE_URL).href, {
+async function search({query, season, episode, page = 1, size = ITEMS_PER_PAGE}) {
+  const q = buildQuery(query, season, episode);
+  const url = new URL('search', process.env.API_BASE_URL).href;
+  const {data} = await axios.get(url, {
     params: {
-      q: query, start: (page - 1) * ITEMS_PER_PAGE, size},
+      q, start: (page - 1) * ITEMS_PER_PAGE, size},
   });
 
   return data;
+}
+
+function buildQuery(query, seasonNum, episodeNum) {
+  const epQuery = seasonNum && episodeNum ? `(and (prefix field='fileid' ` +
+    `'${zeropad(seasonNum)}x${zeropad(episodeNum)}'))` : '';
+
+  return `(and (phrase field='text' '${query}') ${epQuery})`;
 }
