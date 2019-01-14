@@ -18,7 +18,7 @@
                 <label class="uk-form-label uk-padding-small">Season</label>
                 <div class="uk-form-controls">
                   <select class="uk-select" v-model="querySeason" v-on:input="onQueryChange()">
-                    <option disabled>--Choose Season--</option>
+                    <option :value="null">--Choose Season--</option>
                     <option v-for="(episode, index) in episodes" v-bind:key="index"
                         v-bind:value="index + 1">
                       Season {{index + 1}}
@@ -31,7 +31,7 @@
                 <div class="uk-form-controls">
                   <select class="uk-select" v-model="queryEpisode" :disabled="!querySeason"
                       v-on:input="onQueryChange()">
-                    <option disabled>--Choose Episode--</option>
+                    <option :value="null">--Choose Episode--</option>
                     <option v-if="querySeason" v-for="episode in episodesInSeason"
                         v-bind:key="episode.number" v-bind:value="episode.number">
                       {{episode.number}}: {{episode.title}}
@@ -80,6 +80,8 @@
         const isSearching = !!this.query || !!(this.querySeason && this.queryEpisode);
         this.updateSearchState(isSearching);
 
+        console.log('isSearching', isSearching)
+        console.log('queryEpisode', this.queryEpisode)
         if (isSearching) {
           this.$router.push({query: {
             q: this.query,
