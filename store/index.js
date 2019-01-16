@@ -93,9 +93,10 @@ async function search({query, season, episode, page = 1, size = ITEMS_PER_PAGE})
   const {data} = await axios.get(url, {
     params: {
       q,
+      'q.parser': season || episode ? 'structured' : 'simple',
       start: (page - 1) * ITEMS_PER_PAGE,
       size,
-      sort: query ? '_score desc' : 'fileid asc'
+      sort: query ? '_score desc' : 'start_time asc'
     },
   });
 
@@ -103,12 +104,16 @@ async function search({query, season, episode, page = 1, size = ITEMS_PER_PAGE})
 }
 
 function buildQuery({query, season, episode}) {
-  const epQuery = season && episode ? `(and (prefix field='fileid' ` +
-    `'${zeropad(season)}x${zeropad(episode)}'))` : '';
+  if (season || episode) {
+    const epQuery = season && episode ? `(and (prefix field='fileid' ` +
+      `'${zeropad(season)}x${zeropad(episode)}'))` : '';
 
-  if (query) {
-    return `(and (phrase field='text' '${query}') ${epQuery})`;
+    if (query) {
+      return `(and (phrase field='text' '${query}') ${epQuery})`;
+    }
+
+    return epQuery;
   }
 
-  return epQuery;
+  return query;
 }
